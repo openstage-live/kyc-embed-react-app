@@ -1,7 +1,7 @@
 # Twilio KYC (Know Your Customer) Embed React App
 
 The project shows how KYC Embed component can be used in a React Application that is deployed to Twilio Functions and embedded as an iframe into any web page.
-This webpages that are not using the React framework or using an older version of React to embed the KYC Embed component.
+This enables webpages that are not using the React framework or using an older version of React to embed the KYC Embed component.
 The approach used is taken from [Chrome for Developers blog.](https://developer.chrome.com/blog/embed-content/)
 
 ## Step-by-step instructions
