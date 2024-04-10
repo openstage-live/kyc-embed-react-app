@@ -1,6 +1,7 @@
 # Twilio KYC (Know Your Customer) Embed React App
 
 The project shows how KYC Embed component can be used in a React Application that is deployed to Twilio Functions and embedded as an iframe into any web page.
+This webpages that are not using the React framework or using an older version of React to embed the KYC Embed component.
 The approach used is taken from [Chrome for Developers blog.](https://developer.chrome.com/blog/embed-content/)
 
 ## Step-by-step instructions
@@ -48,7 +49,7 @@ curl -X POST 'https://trusthub.twilio.com/v1/ComplianceInquiries/Registration/Re
 --user MY_ACCOUNT_SID:MY_AUTH_TOKEN
 ```
 
-This command will create an inquiry for a UK regulatory bundle, examples of other flows you will find in the documentation.
+This command will create an inquiry for a UK regulatory bundle, examples of other flows you will find in the [Implementaion Guide section](#implementation-guide).
 Before you can execute the command, you need to replace MY_ACCOUNT_SID placeholders with your Twilio account SID and MY_AUTH_TOKEN with your Twilio account auth token, both can be found in the Twilio console.
 Once updated, you can execute the command. The JSON response will look like this:
 
@@ -85,6 +86,11 @@ Once updated, you can save the page and open it in your browser, you should see 
 This means that everything worked, and you successfully embedded the Twilio KYC component into an external page.
 
 ![Getting Started screen](docs/start_screen.png)
+
+## Implementation guide
+
+For detailed and up-to-date information about KYC Embed API please refer to [Implementation Guide here.](https://docs.google.com/document/d/e/2PACX-1vRjNlWTZCRxLw43EjY18uSX_63KPPYCU-1cw1EebbE0sBs6rZYUvVFN7Fem22VX6ODWEPbdkhbKC8Rx/pub)
+
 
 ## Important files
 
