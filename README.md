@@ -3,12 +3,88 @@
 The project shows how KYC Embed component can be used in a React Application that is deployed to Twilio Functions and embedded as an iframe into any web page.
 The approach used is taken from [Chrome for Developers blog.](https://developer.chrome.com/blog/embed-content/)
 
-## Developer environment setup
+## Step-by-step instructions
+
+Before we can start building, you need to ensure you have a Twilio account. You can sign up for free using the link [here.](https://www.twilio.com/try-twilio)
+
+### Developer environment setup
 Make sure you have the software you need:
 
 - [node.js](https://nodejs.org/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [Twilio CLI](https://www.twilio.com/docs/twilio-cli/quickstart)
 - [Twilio Serverless Toolkit](https://www.twilio.com/docs/labs/serverless-toolkit)
+
+### Deploy functions
+The next step is to deploy our code to Twilio Functions. To do this, execute the following command in the root of your project:
+```shell
+npm run deploy
+```
+
+Once deployment is complete, you will see the URLs of your newly created assets. Lookup in the list the URL of index.html page, it will look like the following:
+```shell
+Assets:
+...
+https://kyc-embed-react-app-XXXX-dev.twil.io/index.html
+...
+```
+
+You can open the URL now, it should show a loading indicator and nothing else, this is expected and means that our react app is up and running. Copy the URL – we are ready to move on to the next step.
+
+### Run and Test
+
+The next step is to create an inquiry.
+Normally this would be done from backend, but for the purpose of this tutorial I will use cURL command:
+
+```shell
+curl -X POST 'https://trusthub.twilio.com/v1/ComplianceInquiries/Registration/RegulatoryCompliance/GB/Initialize'
+--header 'Content-Type: application/x-www-form-urlencoded'
+--data-urlencode 'PhoneNumberType=national'
+--data-urlencode 'EndUserType=Business'
+--data-urlencode 'IsIsvEmbed=true'
+--data-urlencode 'NotificationEmail=test@twilio.com'
+--data-urlencode 'StatusCallbackUrl=https://webhook.site/216b84a8-f192-49f7-9c8e-b3e0602447b9'
+--data-urlencode 'BusinessIdentityType=isv_reseller_or_partner'
+--data-urlencode 'FriendlyName=My Friendly Name'
+--user MY_ACCOUNT_SID:MY_AUTH_TOKEN
+```
+
+This command will create an inquiry for a UK regulatory bundle, examples of other flows you will find in the documentation.
+Before you can execute the command, you need to replace MY_ACCOUNT_SID placeholders with your Twilio account SID and MY_AUTH_TOKEN with your Twilio account auth token, both can be found in the Twilio console.
+Once updated, you can execute the command. The JSON response will look like this:
+
+```shell
+{
+"url": "https://trusthub.twilio.com/v1/ComplianceInquiries/Registration/RegulatoryCompliance/GB/Initialize",
+"registration_id": "tri1.us1.account.ACXXXXXXXXXX.registration.BUXXXXXXXXXX",
+"inquiry_session_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+"inquiry_id": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+}
+```
+
+Copy inquiry_session_token and inquiry_id, you will need them for the next step, namely to update the static page, the one that emulates our parent page - your website.
+There are a couple of things to be updated, so first open the file public/static-page.html in a text editor and update the line 9 using the URL copied from the previous step.
+
+```html
+...
+<iframe width='100%' height='800px' id="myIframe" src="https://kyc-embed-react-app-XXX-dev.twil.io/index.html"></iframe>
+...
+```
+
+Then go to lines 16 and 17 and update values of inquire id and inquiry session token, you have copied them before:
+
+```javascript
+...
+iframe.contentWindow.postMessage({
+    inquiryId: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX,
+    inquirySessionToken: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+}, '*')
+...
+```
+
+Once updated, you can save the page and open it in your browser, you should see the Getting Started screen, one like below.
+This means that everything worked, and you successfully embedded the Twilio KYC component into an external page.
+
+![Getting Started screen](docs/start_screen.png)
 
 ## Important files
 
