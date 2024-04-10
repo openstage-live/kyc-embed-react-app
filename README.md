@@ -43,7 +43,7 @@ curl -X POST 'https://trusthub.twilio.com/v1/ComplianceInquiries/Registration/Re
 --data-urlencode 'EndUserType=Business'
 --data-urlencode 'IsIsvEmbed=true'
 --data-urlencode 'NotificationEmail=test@twilio.com'
---data-urlencode 'StatusCallbackUrl=https://webhook.site/216b84a8-f192-49f7-9c8e-b3e0602447b9'
+--data-urlencode 'StatusCallbackUrl=https://backend.com/webhook'
 --data-urlencode 'BusinessIdentityType=isv_reseller_or_partner'
 --data-urlencode 'FriendlyName=My Friendly Name'
 --user MY_ACCOUNT_SID:MY_AUTH_TOKEN
