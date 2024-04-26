@@ -25,11 +25,13 @@ export const KycEmbedComponent = () => {
 
       console.log('>>> message received', event)
 
-      if (event.origin !== 'http://localhost:63342')
-        return
+      // IMPORTANT: The verification below should be in place for your production code
+      // if (event.origin !== 'http://localhost:63342') return
 
-      setInquiryId(event.data.inquiryId)
-      setInquirySessionToken(event.data.inquirySessionToken)
+      if (!!event.data.inquiryId && !!event.data.inquirySessionToken) {
+        setInquiryId(event.data.inquiryId)
+        setInquirySessionToken(event.data.inquirySessionToken)
+      }
     }
 
     window.addEventListener('message', receiveMessage, false)
