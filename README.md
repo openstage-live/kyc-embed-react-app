@@ -18,6 +18,7 @@ Make sure you have the software you need:
 ### Deploy functions
 The next step is to deploy our code to Twilio Functions. To do this, execute the following command in the root of your project:
 ```shell
+npm install
 npm run deploy
 ```
 
