@@ -12,7 +12,10 @@ type InboundEvent = {
   origin: string
 }
 
-type OutboundEvent = 'cancel' | 'complete' | 'ready' | 'error'
+type OutboundEvent = 'cancel' | 'complete' | 'ready' | 'error' | 'auth please'
+
+const managerDomain = 'http://localhost:8082'
+// const managerDomain = 'https://manager-stage.openstage.live'
 
 export const KycEmbedComponent = () => {
 
@@ -22,11 +25,12 @@ export const KycEmbedComponent = () => {
 
   useEffect(() => {
     const receiveMessage = (event: InboundEvent) => {
-
-      console.log('>>> message received', event)
+      // console.log('>>> message received', event)
 
       // IMPORTANT: The verification below should be in place for your production code
-      // if (event.origin !== 'http://localhost:63342') return
+      if (event.origin !== managerDomain) return
+
+      console.log('>>> message received', event.data)
 
       if (!!event.data.inquiryId && !!event.data.inquirySessionToken) {
         setInquiryId(event.data.inquiryId)
@@ -36,6 +40,8 @@ export const KycEmbedComponent = () => {
 
     window.addEventListener('message', receiveMessage, false)
 
+    postEvent('auth please')
+
     return () => {
       window.removeEventListener('message', receiveMessage)
     }
@@ -44,7 +50,7 @@ export const KycEmbedComponent = () => {
   const postEvent = (event: OutboundEvent) => {
     window.parent.postMessage({
       event: event,
-    }, '*') // TODO: replace this with your exact origin for security
+    }, managerDomain)
   }
 
   return isLoading ? (
