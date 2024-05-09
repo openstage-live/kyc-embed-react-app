@@ -14,8 +14,9 @@ type InboundEvent = {
 
 type OutboundEvent = 'cancel' | 'complete' | 'ready' | 'error' | 'auth please'
 
-const managerDomain = 'http://localhost:8082'
+// const managerDomain = 'http://localhost:8082'
 // const managerDomain = 'https://manager-stage.openstage.live'
+const managerDomain = 'https://manager.openstage.live'
 
 export const KycEmbedComponent = () => {
 
@@ -30,7 +31,7 @@ export const KycEmbedComponent = () => {
       // IMPORTANT: The verification below should be in place for your production code
       if (event.origin !== managerDomain) return
 
-      console.log('>>> message received', event.data)
+      // console.log('>>> message received', event.data)
 
       if (!!event.data.inquiryId && !!event.data.inquirySessionToken) {
         setInquiryId(event.data.inquiryId)
@@ -58,24 +59,24 @@ export const KycEmbedComponent = () => {
         <Spinner size='sizeIcon110' decorative={false} title='Loading'/>
       </Box>
     ) :
-    (<div className='App'>
+    (<div className='App InnerApp'>
       <TwilioComplianceEmbed
         inquiryId={inquiryId!}
         inquirySessionToken={inquirySessionToken!}
         onCancel={() => {
           postEvent('cancel')
-          console.log('>>> cancel')
+          // console.log('>>> cancel')
         }}
         onComplete={() => {
-          console.log('>>> complete')
+          // console.log('>>> complete')
           postEvent('complete')
         }}
         onReady={() => {
-          console.log('>>> ready')
+          // console.log('>>> ready')
           postEvent('ready')
         }}
         onError={() => {
-          console.log('>>> error')
+          // console.log('>>> error')
           postEvent('error')
         }}
       />
