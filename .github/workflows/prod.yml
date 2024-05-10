@@ -25,7 +25,7 @@ jobs:
     - name: Twilio Plugins
       run: twilio plugins:install @twilio-labs/plugin-serverless
     - name: Twilio Login
-      run: twilio login --username ${{ secrets.TWILIO_ACCOUNT_SID }} --password ${{ secrets.TWILIO_AUTH_TOKEN }}
+      run: twilio login ${{ secrets.TWILIO_ACCOUNT_SID }} --auth-token ${{ secrets.TWILIO_AUTH_TOKEN }} -p githubactiondeploy -f
     - name: Generate the site
       run: npm run deploy
     - name: Deploy to S3
