@@ -16,7 +16,9 @@
     "react-scripts": "5.0.1",
     "twilio-compliance-embed": "file:twilio-compliance-embed-v0.1.0.tgz",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@twilio-labs/plugin-serverless": "^3.1.8",
+    "twilio": "^5.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
