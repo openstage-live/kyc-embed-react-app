@@ -26,7 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && twilio serverless:deploy --assets-folder=build --functions-folder=functions --override-existing-project --env .env.production",
-    "deploy:stage": "npm run build && twilio serverless:deploy --assets-folder=build --functions-folder=functions-stage --environment=staging --override-existing-project --env .env.staging"
+    "deploy:stage": "npm run build && twilio serverless:deploy --assets-folder=build --functions-folder=functions-stage --environment=staging --override-existing-project --env .env.development"
   },
   "eslintConfig": {
     "extends": [
