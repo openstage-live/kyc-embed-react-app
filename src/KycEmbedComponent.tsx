@@ -49,13 +49,13 @@ export const KycEmbedComponent = () => {
   const postEvent = (event: OutboundEvent) => {
     window.parent.postMessage({
       event: event,
-    }, managerDomain)
+    }, managerDomain as string)
   }
 
   return isLoading ? (
       <Box top='50%' left='50%' position='fixed'>
         <Spinner size='sizeIcon110' decorative={false} title='Loading'/>
-        <p>Test</p>
+        <p>Domain: {managerDomain}</p>
       </Box>
     ) :
     (<div className='App InnerApp'>
