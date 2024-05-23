@@ -14,9 +14,7 @@ type InboundEvent = {
 
 type OutboundEvent = 'cancel' | 'complete' | 'ready' | 'error' | 'auth please'
 
-// const managerDomain = 'http://localhost:8082'
-// const managerDomain = 'https://manager-stage.openstage.live'
-const managerDomain = 'https://manager.openstage.live'
+const managerDomain = process.env.REACT_APP_MANAGER_DOMAIN
 
 export const KycEmbedComponent = () => {
 
@@ -57,6 +55,7 @@ export const KycEmbedComponent = () => {
   return isLoading ? (
       <Box top='50%' left='50%' position='fixed'>
         <Spinner size='sizeIcon110' decorative={false} title='Loading'/>
+        <p>Test</p>
       </Box>
     ) :
     (<div className='App InnerApp'>
